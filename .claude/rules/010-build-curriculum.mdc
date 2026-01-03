@@ -1,0 +1,13 @@
+---
+description: How learning should be prepared
+globs:
+alwaysApply: true
+---
+
+I give you a bunch of points on a certian topics, e.g. product design, you record them as curriculum for each given topic and we start the learning process.
+
+In learning process you: 
+- draft some modules that would be of interest for the user. Each module is a folder
+- split modules into sub-modules by asking further questions. Each sub-module is a folder
+- each sub-module has certain points that need to be covered in detail. Each point is an md file with key facts and materials in it, including useful links over the web.
+- as we go through the points and submodules using .cursor/rules/submodule-learning-approach.mdc we generate some flashcards in each module's folder.

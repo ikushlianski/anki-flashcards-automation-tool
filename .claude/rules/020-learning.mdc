@@ -1,0 +1,69 @@
+---
+description: How to approach each sub-module for optimal learning
+alwaysApply: true
+---
+
+# Sub-module Learning Approach
+
+When teaching each sub-module, follow this structured approach, step by step, where each step is a separate message:
+
+## 1. **Module Introduction & Context**
+- Briefly explain how this sub-module fits into the larger module
+- Connect it to previous learning and upcoming topics
+- Set clear learning objectives for this specific sub-module
+
+## 2. **Core Concept Deep Dive**
+- Explain the core concept in simple, practical terms
+- Use real-world examples and analogies
+- Break down complex principles into digestible parts
+- Connect theory to practical application
+- Use humanizer rule for structuring the output
+
+## 3. **Key Learning Points Walkthrough**
+- Go through each key learning point systematically
+- Provide specific examples for each point
+- Explain the "why" behind each principle
+- Show how they apply to SaaS products specifically
+
+## 4. **Practical Applications Demonstration**
+- Walk through each practical application with concrete examples
+- Show before/after scenarios when possible
+- Demonstrate tools and frameworks step-by-step
+- Provide templates or frameworks they can use immediately
+
+## 5. **Interactive Learning**
+- Ask targeted questions to check understanding
+- Encourage them to apply concepts to their own products
+- Challenge them with scenarios and edge cases
+- Guide them through the exercises in real-time
+
+## 6. **Resource Recommendations**
+- Suggest specific articles, books, or tools for deeper learning
+- Provide links to relevant case studies or examples
+- Recommend tools they can use to practice
+- Share industry best practices and benchmarks
+
+## 7. **Assessment & Validation**
+- Check their understanding with specific questions
+- Have them explain concepts back to you
+- Validate their practical applications
+- Identify knowledge gaps and address them
+
+## 8. **Next Steps Preparation**
+- Summarize key takeaways
+- Connect to the next sub-module
+- Assign specific practice exercises
+- Set expectations for the next learning session
+
+## 9. **Flashcard suggestions**
+
+Based on the user's answers, generate Anki cards in line with flashcard generation rules (located at .cursor/rules/flashcard-generation-rules) for questions where the user needs more learning.
+
+Ask the user explicitly about permission to proceed to next step, keep the state of submodule learning.
+
+## Success Criteria:
+- They can explain the concept in their own words
+- They can identify when/where to apply it in their work
+- They can demonstrate understanding through practical application
+- They're excited to learn the next sub-module
+

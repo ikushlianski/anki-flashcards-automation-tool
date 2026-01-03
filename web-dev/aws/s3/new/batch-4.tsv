@@ -1,0 +1,23 @@
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+What is virtual-hosted–style S3 URL?	Bucket name in the hostname; recommended addressing	Format: <code>https://<strong>bucket</strong>.s3.<strong>region</strong>.amazonaws.com/<strong>key</strong></code>. S3 routes by host header.	Web dev::Cloud Services::AWS::S3
+Why avoid path-style S3 URLs?	Legacy/deprecated in most Regions; not recommended	Path-style: <code>https://s3.<region>.amazonaws.com/bucket/key</code>. Prefer virtual-hosted for compatibility and features.	Web dev::Cloud Services::AWS::S3
+Requester Pays: how to access?	Client must send <code>x-amz-request-payer: requester</code> header	Requester pays request/transfer costs; owner still pays storage. Missing header results in error.	Web dev::Cloud Services::AWS::S3
+Can you transfer a bucket to another account?	No direct transfer; migrate objects and recreate	Use cross-account replication or copy, then update DNS/apps; delete old bucket when done.	Web dev::Cloud Services::AWS::S3
+Directory buckets vs general purpose?	Directory = S3 Express One Zone; single-AZ, ultra-low latency	General purpose = Regional, multi-AZ. Directory buckets have different endpoints/capabilities.	Web dev::Cloud Services::AWS::S3
+Transfer Acceleration requirements?	Enable per bucket; use accelerate endpoint	Example: <code>https://bucket.s3-accelerate.amazonaws.com/key</code>. Boosts long-haul uploads via AWS edge.	Web dev::Cloud Services::AWS::S3
+S3 request rate scaling today?	Virtually unlimited per prefix; no partitioning needed	Modern S3 auto-scales for high request rates; randomizing prefixes usually unnecessary now.	Web dev::Cloud Services::AWS::S3
+Multipart upload benefit?	Parallel parts improve throughput and resiliency	Choose 8–64 MB part sizes typically; required for objects > 5 GB.	Web dev::Cloud Services::AWS::S3
+Range GETs purpose?	Download only needed byte ranges of an object	Resume partial downloads; parallelize ranges for faster large-object reads.	Web dev::Cloud Services::AWS::S3
+Replication: CRR vs SRR?	CRR = cross-region; SRR = same-region replication	Use for DR/compliance (CRR) or same-Region copies (SRR) for latency/workflows.	Web dev::Cloud Services::AWS::S3
+Replication Time Control (RTC)?	Optional SLA: most objects replicated within 15 minutes	Adds metrics and SLA; extra cost; for strict compliance/RPO.	Web dev::Cloud Services::AWS::S3
+Replicating SSE-KMS objects needs?	KMS permissions on source/destination keys for the role	Grant decrypt on source CMK and encrypt on destination CMK to replication role.	Web dev::Cloud Services::AWS::S3
+Replicate delete markers?	Configurable; can replicate delete markers	Enable to mirror deletions; be careful to avoid accidental removal at destination.	Web dev::Cloud Services::AWS::S3
+Object Ownership modes?	Bucket owner enforced, Bucket owner preferred, Object writer	Default: enforced (ACLs disabled). Preferred keeps ownership with bucket owner when possible.	Web dev::Cloud Services::AWS::S3
+Website hosting HTTPS?	S3 website endpoints are HTTP-only	Use CloudFront with OAC for HTTPS and custom domains.	Web dev::Cloud Services::AWS::S3
+CORS minimal example?	Allow origin/methods/headers via bucket CORS	Example JSON: <code>{"AllowedOrigins":["https://app.example"],"AllowedMethods":["GET"],"AllowedHeaders":["*"]}</code>.	Web dev::Cloud Services::AWS::S3
+Presigned URL clock skew tip?	Ensure server clock is accurate (NTP)	Skew can invalidate signatures; keep short expirations for least privilege.	Web dev::Cloud Services::AWS::S3
+Bucket ownership and ACLs today?	ACLs disabled by default; bucket owner owns all objects	Manage access with policies; enable ACLs only for niche per-object control.	Web dev::Cloud Services::AWS::S3
+

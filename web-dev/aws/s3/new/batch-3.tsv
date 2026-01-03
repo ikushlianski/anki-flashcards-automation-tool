@@ -1,0 +1,23 @@
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+What is an S3 Lifecycle rule?	A rule to transition or expire objects automatically	Use to move cold data to cheaper classes or delete after retention; defined by prefix/tags and actions.	Web dev::Cloud Services::AWS::S3
+Lifecycle: common actions?	Transitions and expirations	Example: 30d → Standard-IA, 90d → Glacier, 365d → expire to control costs.	Web dev::Cloud Services::AWS::S3
+Lifecycle: versioned buckets special actions?	Noncurrent transitions/expirations	E.g., noncurrent versions → Glacier after 30 days; keep last 5 noncurrent versions.	Web dev::Cloud Services::AWS::S3
+Intelligent-Tiering: what it does?	Auto-moves objects between access tiers based on access	Small monitoring fee/object; no retrieval fees for frequent/IA tiers; good for unknown patterns.	Web dev::Cloud Services::AWS::S3
+Glacier tiers difference?	Instant Retrieval, Flexible Retrieval, Deep Archive	Instant: ms access; Flexible: minutes–hours; Deep Archive: hours; all for archival cost savings.	Web dev::Cloud Services::AWS::S3
+S3 Select purpose?	Query a subset of object data with SQL	Filter rows/columns from CSV/JSON/Parquet to reduce bytes scanned and costs.	Web dev::Cloud Services::AWS::S3
+S3 Inventory purpose?	Scheduled object listings with metadata reports	Daily/weekly CSV/ORC/Parquet of objects, sizes, encryption, versions; useful for audits.	Web dev::Cloud Services::AWS::S3
+S3 Storage Lens?	Org-wide metrics and dashboards for S3 usage/activity	Find cost-savings, orphaned data, encryption gaps; integrates with AWS Organizations.	Web dev::Cloud Services::AWS::S3
+S3 Access Points?	Named endpoints with policies for shared datasets	Per-app prefix isolation and permissions; can restrict to a VPC; simplifies multi-tenant access.	Web dev::Cloud Services::AWS::S3
+Object Ownership default?	Bucket owner enforced (ACLs disabled)	Bucket owner owns all objects; manage access via policies; ACLs off by default.	Web dev::Cloud Services::AWS::S3
+ACLs vs bucket policies?	Prefer policies; ACLs are legacy and granular per object	Disable ACLs unless you need per-object grants; use IAM/bucket policies otherwise.	Web dev::Cloud Services::AWS::S3
+Event notifications destinations?	SNS, SQS, Lambda (and EventBridge)	Trigger on create/remove; filter by prefix/suffix; grant destination permissions.	Web dev::Cloud Services::AWS::S3
+Keep S3 traffic private from VPC?	Use VPC endpoints	Gateway endpoints for S3 (general buckets); interface endpoints for features like MRAP.	Web dev::Cloud Services::AWS::S3
+Multi-Region Access Point (MRAP)?	Global S3 endpoint routing to the closest healthy region	Great for cross-region buckets; supports PrivateLink via interface endpoints.	Web dev::Cloud Services::AWS::S3
+CORS in S3?	Bucket-level CORS rules allow cross-origin browser requests	Define allowed origins/methods/headers; required for frontend apps fetching S3.	Web dev::Cloud Services::AWS::S3
+SPA on S3 website hosting tips?	Set index and error docs; use CloudFront for HTTPS and SPA rewrites	Use CF Functions/Behaviors to route 404 to index.html for client routing.	Web dev::Cloud Services::AWS::S3
+Pre-signed URL max validity (SigV4)?	Up to 7 days	Keep lifetimes minimal; generate server-side with least-privileged credentials.	Web dev::Cloud Services::AWS::S3
+Bucket naming/global uniqueness?	Globally unique within AWS partition; DNS-compliant	Avoid dots for TLS compatibility; names reusable after delete but may be delayed.	Web dev::Cloud Services::AWS::S3
+

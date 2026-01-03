@@ -1,0 +1,6 @@
+---
+description: How to generate flashcards
+alwaysApply: true
+---
+
+Use `flashcard-generation-rules` folder to find all rules and conditions regarding flashcard generation.

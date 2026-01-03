@@ -1,0 +1,38 @@
+---
+description: Humanize AI responses in learning materials
+alwaysApply: false
+---
+
+It should still preserve documentation language, so it should be official to semi official. It should adhere to the best practices of technical writing from companies like Google.
+
+🗣️ Natural Language & Flow (More Precise & Versatile)
+
+Current: "Rewrite this like you're having a friendly conversation with someone you know well." Improved: "Make this sound like a natural conversation between friends, not a formal response."
+
+Current: "Explain this as if you're chatting with a colleague over coffee." Improved: "Break this down like you're casually explaining it to a colleague in a relaxed setting."
+
+💬 Conversational Elements (More Adaptive)
+
+Current: "Break down complex ideas like you're explaining them to a friend." Improved: "Explain this in a way that makes it instantly clear to someone unfamiliar with the topic."
+
+New Addition: "Use natural phrasing that mimics how people actually talk, avoiding stiff or academic wording."
+
+New Addition: "Make this feel like advice from someone who's been there."
+
+⚡ Active Engagement (Sharper & More Energetic)
+
+Current: "Use active voice and make this more direct." Improved: "Cut out the fluff—use active voice and get straight to the point."
+
+New Addition: "Make this sound more like an engaging conversation than a dry explanation."
+
+🌊 Natural Transitions (Smoother & More Cohesive)
+
+Current: "Make this flow more naturally, like you're telling a story." Improved: "Ensure each idea flows smoothly into the next—no abrupt jumps."
+
+New Addition: "Keep this conversational, avoiding awkward transitions or forced structure."
+
+Only use bullet points when you really think it is necessary to better break the concept into pieces.
+
+🔧 Technical Balance
+
+Explain this like an expert having a casual conversation. Keep the technical depth but strip away unnecessary complexity—no over-explaining. Try to mention as little code as possible in the docs.

@@ -1,0 +1,22 @@
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+What does S3 stand for?	Simple Storage Service	S3 is AWS's object storage with virtually unlimited scale and 11 9s durability.	Web dev::Cloud Services::AWS::S3
+What type of storage is Amazon S3?	Object storage	Objects = data + metadata + key; not block or file storage; ideal for backups, logs, static assets.	Web dev::Cloud Services::AWS::S3
+S3 durability for Standard class is approximately?	99.999999999% (11 nines)	Designed for 11 9s object durability across multiple AZs.	Web dev::Cloud Services::AWS::S3
+Is Amazon S3 strongly consistent?	Yes, strong read-after-write consistency for all operations	Since Dec 2020, PUT/DELETE/LIST/GET reflect latest state immediately.	Web dev::Cloud Services::AWS::S3
+Max single object size in S3?	5 TB	Single PUT is up to 5 GB; use multipart upload for larger files.	Web dev::Cloud Services::AWS::S3
+When should you use multipart upload?	When objects are ≥ 100 MB (recommended)	Improves reliability/performance; required for >5 GB.	Web dev::Cloud Services::AWS::S3
+How many buckets per account by default?	100 (soft limit; can be increased)	Request quota increase if needed; object count per bucket is unlimited.	Web dev::Cloud Services::AWS::S3
+S3 static website endpoints support which protocol?	HTTP only	Use CloudFront for HTTPS on custom domains over S3 website hosting.	Web dev::Cloud Services::AWS::S3
+Which AWS service should you use to globally cache S3 content?	Amazon CloudFront (CDN)	Use Origin Access Control (OAC) or OAI to keep buckets private.	Web dev::Cloud Services::AWS::S3
+How to grant temporary public access to a private object?	Use a pre-signed URL	Generate time-limited URL with required permissions; avoid public ACLs.	Web dev::Cloud Services::AWS::S3
+S3 server-side encryption options?	SSE-S3, SSE-KMS, SSE-C	SSE-S3 uses AES-256; KMS adds key policies/audit; SSE-C uses customer-provided keys.	Web dev::Cloud Services::AWS::S3
+Encryption in transit for S3 uses?	TLS (HTTPS)	Always use HTTPS for API and signed URL access.	Web dev::Cloud Services::AWS::S3
+Requester Pays: who pays for data transfer and requests?	The requester	Clients must send header <code>x-amz-request-payer: requester</code>.	Web dev::Cloud Services::AWS::S3
+Is S3 suitable for running a database?	No	Use EBS/EFS/RDS for DBs; S3 is object storage not block/file.	Web dev::Cloud Services::AWS::S3
+Are EBS snapshots stored in S3, and how?	Yes, stored incrementally in S3	Only changed blocks are saved after the first full snapshot.	Web dev::Cloud Services::AWS::S3
+Transfer Acceleration endpoint format?	<s3-accelerate.amazonaws.com>	Example: <code>https://s3-accelerate.amazonaws.com</code>; enables long-haul speedups via AWS edge.	Web dev::Cloud Services::AWS::S3
+S3 website endpoint URL format?	<bucket>.s3-website-<Region>.amazonaws.com	Example: <code>http://example-bucket.s3-website.us-west-2.amazonaws.com/index.html</code>.	Web dev::Cloud Services::AWS::S3
+S3 replication supports which destinations?	Same or different accounts; single or multiple destination buckets	Can set storage class; replicate delete markers; use Batch Replication for existing objects.	Web dev::Cloud Services::AWS::S3

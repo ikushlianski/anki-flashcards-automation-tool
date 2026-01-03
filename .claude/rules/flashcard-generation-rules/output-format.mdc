@@ -1,0 +1,358 @@
+---
+description: Output of flashcards - formatting
+globs: *
+alwaysApply: true
+---
+# Flashcard Output Format
+
+## Default Format: File with Decks (Deck Column Format)
+
+The default output format should be **TSV (Tab-Separated Values) with deck column** based on Anki's text file import specifications. This allows different flashcards to be organized into different decks within a single file.
+
+## Output Format & Structure Requirements
+
+1. **Format:** The final output must be TSV (Tab-Separated Values) code
+2. **Columns:**
+   - **Regular type flashcards:** Four columns: "Question", "Answer", "Example", "Deck"
+   - **Cloze type flashcards:** Three columns: "Text", "Back Extra", "Deck"
+   - **With Tags column:** Add an additional "Tags" column as the last column
+3. **Header Row:** Skip the header row in the TSV output (headers are for Anki import configuration only)
+
+## File Structure
+
+### Required Headers (For Anki Import Configuration)
+All flashcard files must include these headers at the top:
+
+**For Regular Flashcards:**
+```
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+```
+
+**For Cloze Flashcards:**
+```
+#separator:tab
+#html:true
+#deck column:3
+#columns:Text	Back Extra	Deck
+```
+
+**For Regular Flashcards with Tags:**
+```
+#separator:tab
+#html:true
+#deck column:4
+#tags column:5
+#columns:Question	Answer	Example	Deck	Tags
+```
+
+**For Cloze Flashcards with Tags:**
+```
+#separator:tab
+#html:true
+#deck column:3
+#tags column:4
+#columns:Text	Back Extra	Deck	Tags
+```
+
+### Header Explanation
+- `#separator:tab` - Specifies tab as the field separator
+- `#html:true` - Allows HTML formatting in fields (bold, italics, line breaks, etc.)
+- `#deck column:4` (Regular) or `#deck column:3` (Cloze) - Indicates which column contains deck names
+- `#tags column:5` (Regular) or `#tags column:4` (Cloze) - Indicates which column contains tags (optional)
+- `#tags` - Global tags to add to every imported note (optional)
+- `#columns` - Defines column names for import clarity
+
+### Column Structure
+
+**Regular Flashcards (4 columns):**
+1. **Question** - The front side of the flashcard (what the user sees first)
+2. **Answer** - The back side of the flashcard (the correct response)
+3. **Example** - Additional context, examples, explanations, or developer insights
+4. **Deck** - The deck path where this card should be placed (using :: for hierarchy)
+
+**Regular Flashcards with Tags (5 columns):**
+1. **Question** - The front side of the flashcard (what the user sees first)
+2. **Answer** - The back side of the flashcard (the correct response)
+3. **Example** - Additional context, examples, explanations, or developer insights
+4. **Deck** - The deck path where this card should be placed (using :: for hierarchy)
+5. **Tags** - Space-separated tags for the card
+
+**Cloze Flashcards (3 columns):**
+1. **Text** - The cloze deletion text with {{c1::answer::hint}} format
+2. **Back Extra** - Additional context, examples, explanations, or developer insights
+3. **Deck** - The deck path where this card should be placed (using :: for hierarchy)
+
+**Cloze Flashcards with Tags (4 columns):**
+1. **Text** - The cloze deletion text with {{c1::answer::hint}} format
+2. **Back Extra** - Additional context, examples, explanations, or developer insights
+3. **Deck** - The deck path where this card should be placed (using :: for hierarchy)
+4. **Tags** - Space-separated tags for the card
+
+### Tags Format
+- Tags are separated by spaces in the tags column
+- Example: `javascript react hooks`
+- Tags can also be set globally using `#tags:tag1 tag2 tag3` header
+- Individual card tags supplement global tags
+
+### Deck Naming Convention
+Use hierarchical deck names with `::` separators for organization:
+```
+Technology::Frontend::React
+Technology::Backend::Node.js
+Language::Spanish::Grammar
+PostgreSQL::01-Core-Foundations::01-Getting-Started-Setup::Architecture-Concepts::Partitioning
+```
+
+## Alternative Format: File with Cards (Single Deck)
+
+When all cards belong to the same deck, use this simpler format:
+
+### Headers for Single Deck
+**Regular Flashcards:**
+```
+#separator:tab
+#html:true
+#deck:DeckName
+#columns:Question	Answer	Example
+```
+
+**Cloze Flashcards:**
+```
+#separator:tab
+#html:true
+#deck:DeckName
+#columns:Text	Back Extra
+```
+
+**With Global Tags:**
+```
+#separator:tab
+#html:true
+#deck:DeckName
+#tags:javascript frontend programming
+#columns:Question	Answer	Example
+```
+
+### Column Structure (Single Deck)
+**Regular:** Question | Answer | Example
+**Cloze:** Text | Back Extra
+
+## Formatting Guidelines
+
+### HTML Support
+Since `#html:true` is enabled, you can use:
+- `<strong>text</strong>` for bold
+- `<em>text</em>` for italics
+- `<br>` for line breaks
+- `<code>code</code>` for code formatting
+- Lists with `<ul><li>item</li></ul>`
+
+### Field Content Rules
+- Use tabs to separate columns (never spaces or other separators)
+- Escape quotes by doubling them: `"quoted ""word"" here"`
+- Use HTML line breaks `<br>` instead of actual line breaks
+- Keep each flashcard on a single row
+- **Skip header row in TSV output** - only include data rows
+
+### Special Characters
+- Use HTML entities for special characters:
+  - `&lt;` for <
+  - `&gt;` for >
+  - `&amp;` for &
+
+## Example Files
+
+### Regular Flashcards with Deck Column (Default)
+```
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+What is React?	A JavaScript library for building user interfaces	React uses a virtual DOM for efficient updates and has a component-based architecture. Best practice: Keep components small and focused on a single responsibility.	Technology::Frontend::React
+What is useState?	A React Hook that lets you add state to functional components	<code>const [count, setCount] = useState(0);</code><br>Always use the setter function to update state, never mutate state directly.	Technology::Frontend::React::Hooks
+What is Node.js?	A JavaScript runtime built on Chrome's V8 engine	Node.js enables server-side JavaScript execution. It's event-driven and non-blocking, making it ideal for I/O intensive applications.	Technology::Backend::Node.js
+```
+
+### Regular Flashcards with Deck Column and Tags
+```
+#separator:tab
+#html:true
+#deck column:4
+#tags column:5
+#columns:Question	Answer	Example	Deck	Tags
+What is React?	A JavaScript library for building user interfaces	React uses a virtual DOM for efficient updates and has a component-based architecture. Best practice: Keep components small and focused on a single responsibility.	Technology::Frontend::React	javascript library ui
+What is useState?	A React Hook that lets you add state to functional components	<code>const [count, setCount] = useState(0);</code><br>Always use the setter function to update state, never mutate state directly.	Technology::Frontend::React::Hooks	react hooks state
+```
+
+### Cloze Flashcards with Deck Column
+```
+#separator:tab
+#html:true
+#deck column:3
+#columns:Text	Back Extra	Deck
+Table partitioning refers to {{c1::splitting what is logically one large table into smaller physical pieces::definition}}.	PostgreSQL partitioning improves query performance especially when heavily accessed rows are in a single partition. The partitioned table itself is virtual with no storage.	PostgreSQL::01-Core-Foundations::Architecture-Concepts::Partitioning
+PostgreSQL offers {{c1::three::number}} built-in partitioning methods: {{c2::Range::type}}, {{c3::List::type}}, and {{c4::Hash::type}} partitioning.	Range partitioning uses non-overlapping ranges, List partitioning explicitly defines key values, Hash partitioning uses modulus and remainder calculations.	PostgreSQL::01-Core-Foundations::Architecture-Concepts::Partitioning
+```
+
+### Cloze Flashcards with Deck Column and Tags
+```
+#separator:tab
+#html:true
+#deck column:3
+#tags column:4
+#columns:Text	Back Extra	Deck	Tags
+Table partitioning refers to {{c1::splitting what is logically one large table into smaller physical pieces::database optimization}}.	PostgreSQL partitioning improves query performance especially when heavily accessed rows are in a single partition. The partitioned table itself is virtual with no storage.	PostgreSQL::01-Core-Foundations::Architecture-Concepts::Partitioning	postgresql database optimization
+PostgreSQL offers {{c1::three::number}} built-in partitioning methods: {{c2::Range::type}}, {{c3::List::type}}, and {{c4::Hash::type}} partitioning.	Range partitioning uses non-overlapping ranges, List partitioning explicitly defines key values, Hash partitioning uses modulus and remainder calculations.	PostgreSQL::01-Core-Foundations::Architecture-Concepts::Partitioning	postgresql partitioning methods
+```
+
+### Single Deck Format (Regular)
+```
+#separator:tab
+#html:true
+#deck:PostgreSQL Fundamentals
+#columns:Question	Answer	Example
+What is a primary key?	A unique identifier for each row in a table	<code>CREATE TABLE users (id SERIAL PRIMARY KEY, name VARCHAR(100));</code><br>Primary keys automatically create a unique index and cannot contain NULL values.
+What is normalization?	The process of organizing data to reduce redundancy	First Normal Form (1NF) eliminates duplicate columns. Higher normal forms further reduce redundancy and improve data integrity.
+```
+
+### Single Deck Format with Global Tags
+```
+#separator:tab
+#html:true
+#deck:PostgreSQL Fundamentals
+#tags:postgresql database sql
+#columns:Question	Answer	Example
+What is a primary key?	A unique identifier for each row in a table	<code>CREATE TABLE users (id SERIAL PRIMARY KEY, name VARCHAR(100));</code><br>Primary keys automatically create a unique index and cannot contain NULL values.
+What is normalization?	The process of organizing data to reduce redundancy	First Normal Form (1NF) eliminates duplicate columns. Higher normal forms further reduce redundancy and improve data integrity.
+```
+
+## File Naming Convention
+- Use descriptive names: `postgres-partitioning.tsv`
+- Use `.tsv` extension for tab-separated files
+- Include topic and subtopic in filename when possible
+- Use lowercase with hyphens for readability
+
+## Import Instructions
+1. Save file with `.tsv` extension
+2. In Anki: File → Import
+3. Select the TSV file
+4. Verify field mappings match the headers
+5. Ensure "Allow HTML in fields" is checked
+6. Map tags column to "Tags" field if using tags
+7. Import with appropriate duplicate handling settings
+
+## TSV Output Rules
+- **Always skip the header row** in the actual TSV output
+- Include only the data rows with tab-separated values
+- Headers are configuration directives for Anki import, not data rows
+
+
+# Anki Cloze Card Formation Rules
+
+## CRITICAL REQUIREMENTS - DO NOT VIOLATE
+
+When creating cloze flashcard TSV files for Anki import, you MUST follow these rules exactly:
+
+1. **Headers Must Use `#deck column:3` Format**
+   - NEVER use `#deck:DeckName` format for cloze cards with deck column
+   - The correct format is `#deck column:3` which tells Anki to read deck names from column 3
+   - Example:
+     ```
+     #separator:tab
+     #html:true
+     #deck column:3
+     #columns:Text	Back Extra	Deck
+     ```
+
+2. **Column Names Must Be "Text", "Back Extra", "Deck"**
+   - NOT "Question", "Example", "Deck"
+   - The exact column names in `#columns` directive must be: `Text	Back Extra	Deck`
+   - In Anki field mapping:
+     - TSV column "Text" → maps to Anki field "Question"
+     - TSV column "Back Extra" → maps to Anki field "Example"
+     - TSV column "Deck" → maps to "(Nothing)" (used only for deck placement)
+
+3. **All Data Rows Must Have 3 Columns**
+   - Every data row must have exactly 3 tab-separated values
+   - Even though the Deck column maps to "(Nothing)" in Anki, it MUST exist in the TSV
+   - Format: `[cloze text with {{c1::answer::hint}}]	[example]	[deck path]`
+
+4. **Hints Are Mandatory in Cloze Deletions**
+   - Always use the format: `{{c1::answer::hint}}`
+   - NEVER use: `{{c1::answer}}` without a hint
+   - The hint helps contextualize what type of answer is expected
+
+5. **Maximum 2 Clozes Per Card**
+   - Keep cards focused and atomic
+   - Don't overload a single card with too many deletions
+
+## Basic Structure
+
+A cloze deletion is created by wrapping text in double curly braces with a number and "c" prefix:
+
+```
+{{c1::hidden text::optional hint}}
+```
+
+## Key Rules
+
+- Each cloze must have a number (c1, c2, c3, etc)
+- Multiple clozes can share the same number to be revealed together
+- The hint part is mandatory
+- Multiple clozes can exist in one card, up to 2
+
+## Examples
+
+1. Basic cloze without hint:
+
+```
+JavaScript {{c1::arrays}} are zero-indexed.
+```
+
+2. Cloze with hint:
+
+```
+The {{c1::Promise::async feature}} object represents a completion of an asynchronous operation.
+```
+
+3. Multiple clozes:
+
+```
+{{c1::HTTP}} stands for {{c2::Hypertext Transfer Protocol}}.
+```
+
+4. Multiple clozes with same number (revealed together):
+
+```
+{{c1::React}} was developed by {{c1::Facebook}}.
+```
+
+Bad example:
+To modify how often TanStack Query refetches data, you can configure the {{c1::staleTime::Configuration option}} option.	A longer `staleTime` means queries will not refetch their data as often. Setting `staleTime` to `Infinity` will prevent automatic refetches until the query is manually invalidated.
+
+Why bad: staleTime is encountered in the very next sentence which makes the cloze useless.
+
+
+## Best Practices
+
+- Keep clozes focused on key concepts
+- Use hints when the answer might be ambiguous
+- Ensure the sentence remains grammatically correct when revealed
+- Avoid making clozes too long or complex
+- Use context clues to make answers deducible
+- Design clozes to test comprehension and understanding rather than mere memorization
+- Create cards that require applying concepts in different contexts
+- Include enough context to promote meaningful learning rather than isolated facts
+- Frame questions to test relationships between concepts rather than single terms
+
+
+# Deck hierarchy
+
+1. For ilya folder, the root of the deck needs to be "Web dev", followed by whatever subfolder name(s) there are, e.g. Web dev::Databases::PostgreSQL::01 SQL Language.
+
+2. For corporate folder, the root must be anything Corporate and then whatever subfolder name(s) there are, e.g. Corporate::Databases::PostgreSQL::01 SQL Language. 
+
+In both cases the structure of final decks and cards should mimic the folder structure in this repo but name the hierarchy items in plain language, with capital letters when needed.

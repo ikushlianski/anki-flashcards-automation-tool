@@ -1,0 +1,23 @@
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+Bucket default encryption?	Encrypts new objects by default with SSE-S3, SSE-KMS, or DSSE-KMS	Set bucket default encryption; pair with Bucket Keys to reduce KMS requests.	Web dev::Cloud Services::AWS::S3
+What are S3 Bucket Keys?	KMS data keys cached per bucket to reduce KMS calls/costs	Enable with SSE-KMS to lower per-object KMS request volume.	Web dev::Cloud Services::AWS::S3
+Delete marker behavior with versioning?	Creates a marker that hides the current object; not a delete of data	Permanently delete by removing specific versions; suspend/delete markers carefully.	Web dev::Cloud Services::AWS::S3
+Glacier restore workflow?	Initiate restore, S3 retrieves a temporary copy; original remains archived	Check <code>x-amz-restore</code> header; choose tier (expedited/standard/bulk).	Web dev::Cloud Services::AWS::S3
+Object tagging limits?	Up to 10 key–value tags per object	Use tags for lifecycle transitions, cost allocation, and access control.	Web dev::Cloud Services::AWS::S3
+Copy metadata directive?	<code>x-amz-metadata-directive</code> COPY or REPLACE	REPLACE to set new metadata; COPY to keep source metadata on copy.	Web dev::Cloud Services::AWS::S3
+Abort incomplete multipart via lifecycle?	Yes, configure AbortIncompleteMultipartUpload	Set days-after-initiation to auto-abort and free storage.	Web dev::Cloud Services::AWS::S3
+Replication caveats?	Only new objects post-enable; existing via Batch Replication	Choose whether to replicate tags, ACLs, KMS-encrypted data with proper perms.	Web dev::Cloud Services::AWS::S3
+Website redirect-all feature?	Static hosting can redirect all requests to another host	Configure “Redirect requests for an object” or bucket-level redirect.	Web dev::Cloud Services::AWS::S3
+Access logs best practice?	Write logs to a dedicated, same-Region bucket	Grant write ACL to log delivery; avoid infinite logging loops.	Web dev::Cloud Services::AWS::S3
+Org-restricted bucket policy?	Use <code>aws:PrincipalOrgID</code> condition	Example: allow access only to principals in your AWS Organization.	Web dev::Cloud Services::AWS::S3
+Access Point VPC-only?	Yes, restrict an access point to a specific VPC	Blocks public internet; combine with VPC endpoint for private access.	Web dev::Cloud Services::AWS::S3
+MRAP alias format?	<code><name>.mrap</code> access point alias for global endpoint	Use alias in place of bucket for object operations via MRAP.	Web dev::Cloud Services::AWS::S3
+Bucket name length/charset?	3–63 chars; lowercase letters, numbers, hyphens	Must be DNS-compliant; no uppercase/underscores; cannot look like IP.	Web dev::Cloud Services::AWS::S3
+Object key length max?	Up to 1024 bytes UTF‑8	Prefer URL-safe characters for web apps; avoid trailing dot/dot-dot.	Web dev::Cloud Services::AWS::S3
+Presigned URL edge cases?	Headers must match; include session token for temp creds	Clock skew causes signature errors; limit lifetime; HTTPS only.	Web dev::Cloud Services::AWS::S3
+Bucket owner preferred mode?	Uploader may own object but bucket owner gets full control	Useful when ACLs enabled; recommended mode is still owner enforced.	Web dev::Cloud Services::AWS::S3
+Replication Time Control metrics?	Provides latency metrics and 15‑minute SLA visibility	Monitor percent replicated within target window; investigate lag with metrics.	Web dev::Cloud Services::AWS::S3
+

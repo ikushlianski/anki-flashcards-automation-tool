@@ -1,0 +1,22 @@
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+Are S3 path-style URLs still recommended?	No; use virtual-hosted–style URLs	Virtual-hosted: <code>https://bucket.s3.<region>.amazonaws.com/key</code>. Path-style is deprecated in most regions.	Web dev::Cloud Services::AWS::S3
+Virtual-hosted–style S3 URL format?	<bucket>.s3.<region>.amazonaws.com/<key>	Example: <code>https://my-bucket.s3.us-east-1.amazonaws.com/app/logo.png</code>.	Web dev::Cloud Services::AWS::S3
+S3 website endpoint format (HTTP only)?	<bucket>.s3-website-<region>.amazonaws.com	Example: <code>http://site-bucket.s3-website.eu-west-1.amazonaws.com/index.html</code>.	Web dev::Cloud Services::AWS::S3
+Does Block Public Access override ACLs/policies?	Yes, it overrides and blocks public access	Keep BPA enabled; grant access via CloudFront OAC when needed.	Web dev::Cloud Services::AWS::S3
+Default S3 bucket public access?	Blocked by default	You must explicitly allow access (prefer CloudFront + OAC) instead of public buckets.	Web dev::Cloud Services::AWS::S3
+Is versioning enabled by default?	No, disabled by default	Enable versioning on both source and destination for replication.	Web dev::Cloud Services::AWS::S3
+Replication requirements?	Versioning enabled on source and destination	Use CRR/SRR rules; Batch Replication for pre-existing objects.	Web dev::Cloud Services::AWS::S3
+Does replication copy existing objects automatically?	No; only new/changed objects after enablement	Use S3 Batch Replication to backfill historical objects.	Web dev::Cloud Services::AWS::S3
+Are delete markers replicated?	Optional, configurable in replication rules	Replicate delete markers for DR parity; be careful with accidental deletes.	Web dev::Cloud Services::AWS::S3
+Requester Pays header required?	<x-amz-request-payer: requester>	Without it, requests fail; requester is billed for transfer and request costs.	Web dev::Cloud Services::AWS::S3
+CORS on S3: where to configure?	Bucket CORS configuration	Define allowed origins/methods/headers; necessary for browser cross-origin access.	Web dev::Cloud Services::AWS::S3
+S3 storage classes (core modern names)?	Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier Instant Retrieval, Glacier Flexible Retrieval, Glacier Deep Archive	Pick by access pattern/latency/cost; lifecycle policies can transition between classes.	Web dev::Cloud Services::AWS::S3
+Is RRS still recommended?	No; RRS is deprecated/legacy	Use One Zone-IA for single-AZ lower-cost needs.	Web dev::Cloud Services::AWS::S3
+Object Lock use cases?	WORM retention and legal holds	Compliance/retention: set retention until date; legal hold blocks deletes without time.	Web dev::Cloud Services::AWS::S3
+Pre-signed URLs: typical use?	Grant time-limited access to private objects	Server signs with IAM role; client downloads via HTTPS without exposing credentials.	Web dev::Cloud Services::AWS::S3
+Transfer Acceleration usage?	Use accelerate endpoint to speed long-distance transfers	<code>https://s3-accelerate.amazonaws.com</code> or <code>https://bucket.s3-accelerate.amazonaws.com</code>.	Web dev::Cloud Services::AWS::S3
+S3 key naming best practice?	Avoid leading slashes and trailing dots; use prefixes for grouping	Use descriptive prefixes (e.g., <code>logs/2025/10/</code>) to improve listing patterns.	Web dev::Cloud Services::AWS::S3
+S3 Express One Zone (directory buckets) target use?	Ultra-low-latency, high-ops workloads in a single AZ	Trade AZ redundancy for performance; choose AZ/Local Zone placement.	Web dev::Cloud Services::AWS::S3

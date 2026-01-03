@@ -1,0 +1,23 @@
+#separator:tab
+#html:true
+#deck column:4
+#columns:Question	Answer	Example	Deck
+Minimum storage duration: Standard-IA?	30 days	Early deletes billed pro‑rata; retrieval fee applies. Use for infrequent but rapid access.	Web dev::Cloud Services::AWS::S3
+Minimum storage duration: One Zone-IA?	30 days	Cheaper single‑AZ resilience; not for mission‑critical data.	Web dev::Cloud Services::AWS::S3
+Minimum storage duration: Glacier Flexible Retrieval?	90 days	Lower cost archival; retrieval in minutes to hours; retrieval fee tiers.	Web dev::Cloud Services::AWS::S3
+Minimum storage duration: Glacier Deep Archive?	180 days	Lowest cost archival; hours retrieval; high early‑delete penalties.	Web dev::Cloud Services::AWS::S3
+Intelligent‑Tiering fees?	Per‑object monitoring + small tiering fee	No retrieval fees for Frequent/IA; auto‑tiers across frequent, infrequent, archive tiers.	Web dev::Cloud Services::AWS::S3
+S3 Object Lambda purpose?	Transform data on‑the‑fly per request via Lambda	Redact PII, convert formats without changing underlying object.	Web dev::Cloud Services::AWS::S3
+S3 Access Grants purpose?	Broker fine‑grained, auditable access to S3 data	Centralizes entitlements, short‑lived creds; integrates with identities and catalogs.	Web dev::Cloud Services::AWS::S3
+Server‑access logging vs CloudTrail?	Logging = access logs in a bucket; CloudTrail = API audit	Use both: logs for access analytics; CloudTrail for security/compliance events.	Web dev::Cloud Services::AWS::S3
+Presigned URL vs presigned POST?	URL = simple GET/PUT; POST = browser HTML form upload	POST supports policy conditions (size, key prefix, headers) for secure direct uploads.	Web dev::Cloud Services::AWS::S3
+Website redirects in S3?	Use routing rules or object metadata Website‑Redirect‑Location	Example rule: redirect /old/* → /new/* with 301.	Web dev::Cloud Services::AWS::S3
+Dual‑Layer SSE (DSSE‑KMS)?	Encrypts each object with two independent KMS keys	Extra protection; configure via headers or bucket default; higher cost/latency.	Web dev::Cloud Services::AWS::S3
+Eventing: EventBridge vs legacy notifications?	EventBridge = broader event bus; legacy = direct SNS/SQS/Lambda	EventBridge scales, supports filtering/routing across services.	Web dev::Cloud Services::AWS::S3
+Transfer Acceleration speed test URL?	<s3-accelerate-speedtest.s3-accelerate.amazonaws.com/…>	Compare performance by region and bucket; enable TA first on the bucket.	Web dev::Cloud Services::AWS::S3
+Multipart limits?	Parts: 5 MB–5 GB (except last); up to 10,000 parts	Choose part size so total parts ≤ 10k; record UploadId for resume/abort.	Web dev::Cloud Services::AWS::S3
+Range GET best practice?	Parallelize range reads for large objects; respect server limits	Use 8–16 MB ranges; cap concurrency to avoid throttling.	Web dev::Cloud Services::AWS::S3
+Access Analyzer for S3?	Finds public/cross‑account access risks	Enables policy insights; fix unintended exposure quickly.	Web dev::Cloud Services::AWS::S3
+Access Point alias?	DNS alias usable where bucket name is expected	<code>alias.s3-accesspoint.<region>.amazonaws.com</code> for object operations.	Web dev::Cloud Services::AWS::S3
+Performance tips today?	Use multipart, parallelism, keep‑alive, and modern SDKs	Key randomization no longer required; rely on SDK retries/backoff and connection pooling.	Web dev::Cloud Services::AWS::S3
+
